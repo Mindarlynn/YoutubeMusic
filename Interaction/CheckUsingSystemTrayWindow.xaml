@@ -1,0 +1,76 @@
+﻿<Window x:Class="YoutubeMusic.Interaction.CheckUsingSystemTrayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YoutubeMusic.Interaction"
+        xmlns:viewModel="clr-namespace:YoutubeMusic.ViewModel"
+        mc:Ignorable="d"
+        Title="시스템 트레이 사용" Height="200" Width="300" 
+        Background="#FF232323">
+    <Window.DataContext>
+        <viewModel:CheckUsingSystemTrayWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel>
+            <Rectangle Height="30"/>
+            <TextBlock 
+                HorizontalAlignment="Center"
+                FontSize="15"
+                FontFamily="malgun gothic bold"
+                Foreground="WhiteSmoke">
+                <Run Text="프로그램을 종료하지 말고"/><LineBreak/>
+                <Run Text="시스템 트레이에 이동할까요?"/>
+            </TextBlock>
+            <Rectangle Height="40"></Rectangle>
+            <CheckBox>
+                <CheckBox.Style>
+                    <Style TargetType="{x:Type CheckBox}">
+                        <Setter Property="Margin" Value="110 0 0 0"/>
+                        <Setter Property="Foreground" Value="WhiteSmoke"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="FontFamily" Value="malgun gothic semilight"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="Content" Value="더 이상 묻지 않기"/>
+                        <Setter Property="IsChecked" Value="{Binding IsChecked}"/>
+                        <Setter Property="LayoutTransform">
+                            <Setter.Value>
+                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="0.8" ScaleY="0.8"></ScaleTransform>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Value="True" Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=CheckBox}}">
+                                <Setter Property="Foreground" Value="WhiteSmoke"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                            </DataTrigger>
+                            <DataTrigger Value="True" Binding="{Binding Path=IsFocused, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=CheckBox}}">
+                                <Setter Property="Foreground" Value="WhiteSmoke"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </CheckBox.Style>
+            </CheckBox>
+            <Rectangle Height="5"></Rectangle>
+            <StackPanel 
+                Orientation="Horizontal"
+                HorizontalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Width" Value="96"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="WhiteSmoke"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Content="예" Command="{Binding CommandYes}"/>
+                <Rectangle Width="10"/>
+                <Button Content="아니오" Command="{Binding CommandNo}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
